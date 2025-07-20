@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Tracker</title>
+    <style>
+        :root {
+            --primary-color: #6A5ACD; /* Royal Purple */
+            --secondary-color: #FFD700; /* Gold */
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            color: var(--dark-color);
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .counter-display {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .dialog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+        }
+
+        .dialog.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            color: #777;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #333;
+            background-color: #f0f0f0;
+        }
+
+        .dialog-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dialog.active .dialog-content {
+            transform: translateY(0);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #5a4ac4;
+            transform: translateY(-2px);
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-message {
+            color: #4caf50;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .success-message.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Donation Tracker</h1>
+            <p>Make your donation and help our cause!</p>
+        </header>
+
+        <div class="counter-display">
+            Donations Received: <span id="form-counter">0</span>
+        </div>
+
+        <button class="open-dialog-btn" id="open-dialog">Donate Now</button>
+
+        <div id="success-message" class="success-message">
+            Thank you for your donation!
+        </div>
+    </div>
+
+    <div class="dialog" id="form-dialog">
+        <div class="dialog-content">
+            <button class="close-btn" id="close-dialog">×</button>
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Make a Donation</h2>
+            <form id="submission-form">
+                <div class="form-group">
+                    <label for="name">Donor Name*</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone* (+91 WhatsApp Number)</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service-date">Service Date</label>
+                    <input type="date" id="service-date">
+                </div>
+
+                <div class="form-group">
+                    <label for="parcel-name">Name of Parcel</label>
+                    <input type="text" id="parcel-name">
+                </div>
+
+                <div class="form-group">
+                    <label for="parcel-count">Count</label>
+                    <input type="number" id="parcel-count" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="total-amount">Total Amount</label>
+                    <input type="number" id="total-amount" readonly value="75">
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit">DONATE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openDialogBtn = document.getElementById('open-dialog');
+            const dialog = document.getElementById('form-dialog');
+            const form = document.getElementById('submission-form');
+            const counterElement = document.getElementById('form-counter');
+            const successMessage = document.getElementById('success-message');
+
+            let formCounter = localStorage.getItem('formCounter') || 0;
+            counterElement.textContent = formCounter;
+
+            openDialogBtn.addEventListener('click', function() {
+                dialog.classList.add('active');
+            });
+
+            document.getElementById('close-dialog').addEventListener('click', function() {
+                dialog.classList.remove('active');
+                form.reset();
+            });
+
+            document.getElementById('parcel-count').addEventListener('input', function() {
+                const count = parseInt(this.value) || 0;
+                document.getElementById('total-amount').value = count * 75;
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                formCounter++;
+                counterElement.textContent = formCounter;
+                localStorage.setItem('formCounter', formCounter);
+                dialog.classList.remove('active');
+                form.reset();
+                successMessage.classList.add('show');
+                setTimeout(function() {
+                    successMessage.classList.remove('show');
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

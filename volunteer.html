@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Volunteer With Us - Sagar Ratan Foundation</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#6A5ACD', /* Royal Purple */
+          gold: '#FFD700',    /* Gold */
+        }
+      }
+    }
+  }
+</script>
+<script src="https://kit.fontawesome.com/a2e0e6ad4f.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+<!-- Navbar -->
+<nav class="bg-primary text-white p-4 shadow-md">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="text-2xl font-bold">Sagar Ratan Foundation</div>
+    <ul class="flex gap-4 text-sm">
+      <li><a href="index.html" class="hover:text-gold">Home</a></li>
+      <li><a href="about.html" class="hover:text-gold">About</a></li>
+      <li><a href="donate.html" class="hover:text-gold">Donate</a></li>
+      <li><a href="volunteer.html" class="hover:text-gold font-bold">Volunteer</a></li>
+      <li><a href="contact.html" class="hover:text-gold">Contact</a></li>
+      <li><a href="admin.html" class="hover:text-gold">Admin</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="relative text-center text-white py-24"
+  style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;">
+  <div class="absolute inset-0 bg-primary/80"></div>
+  <div class="relative z-10 px-4">
+    <h1 class="text-4xl font-bold mb-2">Become a Volunteer</h1>
+    <p class="text-lg max-w-xl mx-auto">Give time. Share skills. Change lives.</p>
+  </div>
+</section>
+
+<!-- Why Volunteer -->
+<section class="py-12 px-4 max-w-3xl mx-auto text-center">
+  <h2 class="text-3xl font-bold text-primary mb-4">Why Your Time Matters</h2>
+  <p class="text-gray-700">
+    Volunteers power every meal served, every health camp run, and every child reached through education.
+    Whether you can help on the ground or online, we’ll match you with meaningful opportunities.
+  </p>
+</section>
+
+<!-- Ways You Can Help -->
+<section class="py-12 bg-gray-100">
+  <div class="container mx-auto px-4">
+    <h3 class="text-2xl font-bold text-center text-primary mb-8">Ways You Can Help</h3>
+    <div class="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold text-primary mb-2">Community Support</h4>
+        <p class="text-gray-600 text-sm">Help distribute food & relief kits during emergencies.</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold text-primary mb-2">Health Camp Assistance</h4>
+        <p class="text-gray-600 text-sm">Assist doctors, manage registrations, and guide patients.</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold text-primary mb-2">Education Mentor</h4>
+        <p class="text-gray-600 text-sm">Help tutor children or run learning workshops.</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold text-primary mb-2">Technical & IT Support</h4>
+        <p class="text-gray-600 text-sm">Help manage our website, create graphics, troubleshoot tech.</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold text-primary mb-2">Event Management</h4>
+        <p class="text-gray-600 text-sm">Plan drives, fundraisers, and community awareness programs.</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold text-primary mb-2">Content Creation</h4>
+        <p class="text-gray-600 text-sm">Create social posts, videos, and stories that inspire action.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Volunteer Form -->
+<section class="py-16">
+  <div class="container mx-auto px-4 max-w-xl bg-white rounded-lg shadow-lg p-8">
+    <h3 class="text-2xl font-bold text-center text-primary mb-6">Volunteer Sign-Up</h3>
+    <form id="volunteerForm" class="space-y-4">
+      <input type="text" id="vname" placeholder="Full Name" class="w-full p-3 border rounded focus:outline-none focus:border-primary" required>
+      <input type="email" id="vemail" placeholder="Email Address" class="w-full p-3 border rounded focus:outline-none focus:border-primary" required>
+      <input type="tel" id="vphone" placeholder="Phone / WhatsApp" class="w-full p-3 border rounded focus:outline-none focus:border-primary" required>
+      <select id="vrole" class="w-full p-3 border rounded focus:outline-none focus:border-primary">
+        <option value="">Select How You Want to Help</option>
+        <option value="Community Support">Community Support (Food/Relief)</option>
+        <option value="Health Camp Assistance">Health Camp Assistance</option>
+        <option value="Education Mentor">Education Mentor</option>
+        <option value="Technical & IT Support">Technical & IT Support</option>
+        <option value="Event Management">Event Management</option>
+        <option value="Content Creation">Content Creation / Social Media</option>
+        <option value="Any / Wherever Needed">Any / Wherever Needed</option>
+      </select>
+      <textarea id="vmessage" rows="4" placeholder="Tell us about your availability or skills (optional)" class="w-full p-3 border rounded focus:outline-none focus:border-primary"></textarea>
+      <button type="submit" class="w-full bg-primary text-white font-bold py-3 rounded hover:bg-purple-700 transition">Submit</button>
+      <p id="vMsg" class="text-sm mt-2 text-center"></p>
+    </form>
+  </div>
+</section>
+
+<!-- CTA Donate -->
+<section class="py-12 text-center">
+  <h3 class="text-2xl font-bold text-primary mb-4">Can’t Volunteer Right Now?</h3>
+  <p class="text-gray-600 mb-6">You can still make a big impact by supporting our programs.</p>
+  <a href="donate.html" class="bg-gold text-primary px-8 py-3 rounded font-bold shadow hover:bg-yellow-300 transition">Donate Now</a>
+</section>
+
+<!-- Mega Footer -->
+<footer class="bg-[#1B1B2F] text-gray-300 pt-12 pb-8 mt-16">
+  <div class="container mx-auto px-4 grid gap-10 md:grid-cols-4">
+    <!-- About -->
+    <div>
+      <h3 class="text-lg font-bold text-gold mb-4">Sagar Ratan Foundation</h3>
+      <p class="text-sm mb-4">Creating hope and opportunity through community-led action across India.</p>
+      <div class="flex space-x-3">
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-[#1B1B2F] transition"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-[#1B1B2F] transition"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-[#1B1B2F] transition"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-[#1B1B2F] transition"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-bold text-gold mb-4">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="index.html" class="hover:text-gold">Home</a></li>
+        <li><a href="about.html" class="hover:text-gold">About Us</a></li>
+        <li><a href="index.html#projects" class="hover:text-gold">Our Programs</a></li>
+        <li><a href="donate.html" class="hover:text-gold">Donate</a></li>
+        <li><a href="volunteer.html" class="hover:text-gold">Volunteer</a></li>
+        <li><a href="contact.html" class="hover:text-gold">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div>
+      <h3 class="text-lg font-bold text-gold mb-4">Support</h3>
+      <ul class="space-y-2 text-sm">
+        <li>Privacy Policy</li>
+        <li>Terms of Use</li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h3 class="text-lg font-bold text-gold mb-4">Newsletter</h3>
+      <p class="text-sm mb-4">Subscribe to receive updates about our work and events.</p>
+      <form id="newsletterForm" class="space-y-2">
+        <input type="email" id="nlemail" required placeholder="Your Email Address" class="w-full px-3 py-2 rounded bg-white/10 border border-white/20 text-sm focus:bg-white/20 focus:outline-none">
+        <button type="submit" class="w-full bg-gold text-[#1B1B2F] font-bold py-2 rounded hover:bg-yellow-300 transition">Subscribe</button>
+        <p id="nlMsg" class="text-xs mt-1"></p>
+      </form>
+    </div>
+  </div>
+  <div class="border-t border-white/10 mt-12 pt-6 text-center text-xs text-gray-400">
+    © 2025 Sagar Ratan Foundation. All Rights Reserved.
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  // Volunteer Form Submit
+  const vForm = document.getElementById('volunteerForm');
+  const vMsg = document.getElementById('vMsg');
+  vForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    vMsg.textContent = "Submitting...";
+    const role = document.getElementById('vrole').value;
+    const userMsg = document.getElementById('vmessage').value;
+    // Pack role into message so backend stores it (no backend change needed)
+    const combinedMessage = role ? `[Role: ${role}] ${userMsg}` : userMsg;
+    const data = {
+      name: document.getElementById('vname').value,
+      email: document.getElementById('vemail').value,
+      phone: document.getElementById('vphone').value,
+      message: combinedMessage
+    };
+    try {
+      const res = await fetch('/api/volunteer', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      const out = await res.json();
+      vMsg.textContent = out.message || (res.ok ? "Submitted!" : "Error.");
+      vMsg.style.color = res.ok ? "green" : "red";
+      if(res.ok) vForm.reset();
+    } catch (err) {
+      vMsg.textContent = "Network error.";
+      vMsg.style.color = "red";
+    }
+  });
+
+  // Newsletter Submit
+  const nlForm = document.getElementById('newsletterForm');
+  const nlMsg = document.getElementById('nlMsg');
+  nlForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    nlMsg.textContent = "Submitting...";
+    const email = document.getElementById('nlemail').value;
+    try {
+      const res = await fetch('/api/newsletter', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ email })
+      });
+      const out = await res.json();
+      nlMsg.textContent = out.message || (res.ok ? "Subscribed!" : "Error.");
+      nlMsg.style.color = res.ok ? "lightgreen" : "red";
+      if(res.ok) document.getElementById('nlemail').value = '';
+    } catch {
+      nlMsg.textContent = "Network error.";
+      nlMsg.style.color = "red";
+    }
+  });
+</script>
+</body>
+</html>

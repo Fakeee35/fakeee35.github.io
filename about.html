@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About Us - Sagar Ratan Foundation</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#6A5ACD', /* Royal Purple */
+          gold: '#FFD700',    /* Gold */
+          darkbg: '#1B1B2F'
+        }
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a2e0e6ad4f.js" crossorigin="anonymous"></script>
+
+<style>
+  :root {
+    --primary: #6A5ACD;
+    --secondary: #FFD700;
+    --dark: #1B1B2F;
+    --light: #f8f9fa;
+  }
+  *{box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  html,body{margin:0;padding:0;line-height:1.6;background:var(--light);color:#202124;}
+
+  header.sticky-header{
+    background:var(--primary);
+    color:#fff;
+    position:sticky;top:0;z-index:50;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  header .nav-container{
+    max-width:1200px;margin:0 auto;padding:0.75rem 1rem;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  header .logo-wrap{display:flex;align-items:center;font-weight:700;font-size:1.25rem;gap:.5rem;}
+  header .logo-wrap img{height:40px;width:auto;}
+  header ul.nav-links{list-style:none;display:flex;gap:1.75rem;font-size:.9rem;}
+  header ul.nav-links a{color:#fff;text-decoration:none;transition:.2s;}
+  header ul.nav-links a:hover{color:var(--secondary);}
+
+  /* Hero */
+  .hero{
+    background:url('https://images.unsplash.com/photo-1543422964-190635e3ed6b?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+    height:70vh;position:relative;display:flex;align-items:center;
+  }
+  .hero::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.55);}
+  .hero-content{position:relative;z-index:2;color:#fff;max-width:700px;padding:0 1rem;}
+  .hero-content h1{font-size:2.75rem;margin-bottom:1rem;font-weight:700;}
+  .hero-content p{font-size:1.1rem;margin-bottom:2rem;}
+  .btn{display:inline-block;padding:.9rem 2.25rem;border-radius:6px;font-weight:600;text-decoration:none;transition:.25s;}
+  .btn-accent{background:var(--secondary);color:var(--dark);}
+  .btn-accent:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(0,0,0,.25);}
+  .btn-outline-light{background:transparent;border:2px solid #fff;color:#fff;margin-left:1rem;}
+  .btn-outline-light:hover{background:rgba(255,255,255,.15);}
+
+  section.section{padding:5rem 0;}
+  .section-title{text-align:center;max-width:700px;margin:0 auto 3rem;}
+  .section-title h2{font-size:2.25rem;color:var(--primary);margin-bottom:.75rem;font-weight:700;}
+  .section-title p{color:#666;font-size:1.05rem;}
+
+  /* About grid */
+  .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;align-items:center;max-width:1200px;margin:0 auto;padding:0 1rem;}
+  .about-grid img{width:100%;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.12);}
+
+  .about-grid .about-text ul{margin:1rem 0 0 1.25rem;list-style:disc;color:#555;font-size:.95rem;}
+
+  /* Focus Areas / Services */
+  .focus-areas{background:#f5f7fa;}
+  .focus-grid{max-width:1200px;margin:0 auto;padding:0 1rem;display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .focus-card{background:#fff;border-radius:10px;padding:2rem;text-align:left;box-shadow:0 5px 15px rgba(0,0,0,.08);transition:.25s;}
+  .focus-card:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(0,0,0,.15);}
+  .focus-card .icon{
+    width:64px;height:64px;border-radius:50%;background:var(--primary);
+    display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;
+  }
+  .focus-card .icon i{color:#fff;font-size:1.5rem;}
+  .focus-card h3{margin-bottom:.75rem;font-size:1.25rem;color:var(--dark);}
+  .focus-card p{color:#666;font-size:.95rem;}
+
+  /* Stats band */
+  .statsband{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#fff;text-align:center;padding:4rem 1rem;
+  }
+  .statsgrid{max-width:1200px;margin:0 auto;display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+  .stat h3{font-size:2.5rem;font-weight:700;margin-bottom:.25rem;}
+  .stat p{font-size:1rem;}
+
+  /* Testimonials Slider */
+  .testimonials-wrap{max-width:900px;margin:0 auto;position:relative;padding:0 1rem;}
+  .t-slider{overflow:hidden;position:relative;}
+  .t-track{display:flex;transition:transform .5s ease;touch-action:pan-y;}
+  .t-card{
+    min-width:100%;padding:2rem;margin:0 auto;
+    background:#f5f7fa;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.08);
+    text-align:left;position:relative;
+  }
+  .t-card p.quote{font-style:italic;margin-bottom:1.5rem;color:#333;}
+  .t-author{display:flex;align-items:center;gap:1rem;}
+  .t-author-img{width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+  .t-author-img img{width:100%;height:100%;object-fit:cover;}
+  .t-author-info h4{margin:0;font-size:1.05rem;font-weight:600;}
+  .t-author-info span{font-size:.85rem;color:#777;}
+
+  .t-controls{display:flex;justify-content:center;align-items:center;gap:.5rem;margin-top:1.5rem;}
+  .t-dot{width:10px;height:10px;border-radius:50%;background:#d0d0d0;cursor:pointer;transition:.2s;}
+  .t-dot.active{background:var(--primary);transform:scale(1.2);}
+  .t-arrow{position:absolute;top:50%;transform:translateY(-50%);background:var(--primary);color:#fff;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.9;}
+  .t-arrow:hover{opacity:1;}
+  .t-arrow.prev{left:-16px;}
+  .t-arrow.next{right:-16px;}
+
+  /* Donate block */
+  .donate-block{max-width:900px;margin:0 auto;padding:0 1rem;text-align:center;}
+  .donation-cards{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:2.5rem;}
+  .donation-card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 5px 15px rgba(0,0,0,.08);}
+  .donation-card h3{margin-bottom:.5rem;color:var(--dark);}
+  .donation-card p{color:#666;font-size:.95rem;margin-bottom:1rem;}
+  .donation-card .btn-accent{display:inline-block;width:100%;text-align:center;}
+
+  /* Contact section local styles override tailwind spacing */
+  .contact-grid{max-width:1200px;margin:0 auto;padding:0 1rem;display:grid;gap:3rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+  .contact-details div{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1rem;color:#444;font-size:.95rem;}
+  .contact-details i{color:var(--primary);margin-top:.25rem;}
+
+  .contact-form input,
+  .contact-form textarea{
+    width:100%;padding:1rem;margin-bottom:1rem;border:1px solid #ddd;border-radius:5px;font-size:1rem;
+  }
+  .contact-form textarea{height:140px;resize:vertical;}
+
+  @media(max-width:768px){
+    .hero-content h1{font-size:2rem;}
+    header ul.nav-links{display:none;} /* simple mobile collapse (minimal) */
+    .t-arrow.prev{left:4px}.t-arrow.next{right:4px}
+  }
+</style>
+</head>
+<body>
+
+<header class="sticky-header">
+  <div class="nav-container">
+    <div class="logo-wrap">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1d4e61b-5cbe-4163-bde6-0a048bef20ee.png" alt="Sagar Ratan Foundation logo">
+      Sagar Ratan Foundation
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#abouttop">About Us</a></li>
+      <li><a href="#focus">Focus Areas</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+      <li><a href="donate.html">Donate</a></li>
+      <li><a href="volunteer.html">Volunteer</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Empowering Communities For A Brighter Future</h1>
+    <p>Sagar Ratan Foundation works across India to provide food security, primary healthcare, and educational access in communities that need it most.</p>
+    <a href="contact.html" class="btn btn-accent">Get Help Now</a>
+    <a href="donate.html" class="btn btn-outline-light">Support Our Mission</a>
+  </div>
+</section>
+
+<!-- About -->
+<section id="abouttop" class="section">
+  <div class="section-title">
+    <h2>About Sagar Ratan Foundation</h2>
+    <p>Founded in 2025, we are a community-focused NGO delivering rapid relief in crises and long-term development in education, nutrition, and health access.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h3>Our Mission & Vision</h3>
+      <p>We envision equitable communities where everyone has access to food, healthcare, and learning opportunities. Our mission is to mobilize citizens, partners, and technology to reach underserved populations quickly and compassionately.</p>
+      <p>SRF implements holistic, community-led interventions focused on:</p>
+      <ul>
+        <li>Emergency food & relief distribution</li>
+        <li>Rural & slum health outreach camps</li>
+        <li>Education and digital learning access</li>
+        <li>Livelihood & skills training for families</li>
+      </ul>
+    </div>
+    <div class="about-img">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3c772264-a59e-49ed-a674-a8a59311cb65.png" alt="Community outreach at Sagar Ratan Foundation">
+    </div>
+  </div>
+</section>
+
+<!-- Focus Areas -->
+<section id="focus" class="section focus-areas">
+  <div class="section-title">
+    <h2>Our Focus Areas</h2>
+    <p>Targeted programs built with local partners to create lasting change.</p>
+  </div>
+  <div class="focus-grid">
+    <div class="focus-card">
+      <div class="icon"><i class="fas fa-utensils"></i></div>
+      <h3>Food Security</h3>
+      <p>Meal distribution drives, community kitchens, and nutrition packs for children & seniors.</p>
+    </div>
+    <div class="focus-card">
+      <div class="icon"><i class="fas fa-stethoscope"></i></div>
+      <h3>Health Outreach</h3>
+      <p>Free medical checkup camps, basic medicines, and health awareness workshops.</p>
+    </div>
+    <div class="focus-card">
+      <div class="icon"><i class="fas fa-book-open"></i></div>
+      <h3>Education Support</h3>
+      <p>Scholarships, digital learning kits, and community study centers.</p>
+    </div>
+    <div class="focus-card">
+      <div class="icon"><i class="fas fa-briefcase"></i></div>
+      <h3>Livelihood & Skills</h3>
+      <p>Vocational training and micro-support for women & youth-led enterprises.</p>
+    </div>
+    <div class="focus-card">
+      <div class="icon"><i class="fas fa-users"></i></div>
+      <h3>Volunteer Network</h3>
+      <p>Mobilizing local volunteers & college youth for rapid ground response.</p>
+    </div>
+    <div class="focus-card">
+      <div class="icon"><i class="fas fa-globe-asia"></i></div>
+      <h3>Tech for Good</h3>
+      <p>Data + mapping to improve last-mile delivery and program transparency.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="statsband">
+  <div class="statsgrid">
+    <div class="stat">
+      <h3>5,000+</h3>
+      <p>Individuals Helped</p>
+    </div>
+    <div class="stat">
+      <h3>1,500+</h3>
+      <p>Medical Screenings</p>
+    </div>
+    <div class="stat">
+      <h3>100+</h3>
+      <p>Active Volunteers</p>
+    </div>
+    <div class="stat">
+      <h3>20+</h3>
+      <p>Communities Reached</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" class="section">
+  <div class="section-title">
+    <h2>Community Voices</h2>
+    <p>Stories from people impacted by Sagar Ratan Foundation programs.</p>
+  </div>
+  <div class="testimonials-wrap">
+    <button class="t-arrow prev" aria-label="Previous testimonial">&lt;</button>
+    <button class="t-arrow next" aria-label="Next testimonial">&gt;</button>
+    <div class="t-slider">
+      <div class="t-track" id="tTrack">
+        <!-- 1 -->
+        <div class="t-card">
+          <p class="quote">"When floods damaged our village stock, SRF arrived with cooked meals and dry ration kits within 48 hours. Their volunteers stayed until every family was fed. We now partner with them for nutrition days."</p>
+          <div class="t-author">
+            <div class="t-author-img">
+              <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3b600dbf-33d0-420a-81a5-ab883cf64c5a.png" alt="Rajesh Mehra">
+            </div>
+            <div class="t-author-info">
+              <h4>Rajesh Mehra</h4>
+              <span>Community Volunteer</span>
+            </div>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="t-card">
+          <p class="quote">"My neighborhood had no access to basic health checks. SRF’s free medical camp screened over 400 people in one day — including my mother, who received early diabetes care. Their work truly serves the public good."</p>
+          <div class="t-author">
+            <div class="t-author-img">
+              <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9a7c3677-41d4-4367-89f9-55540d10b7e1.png" alt="Sunita Patel">
+            </div>
+            <div class="t-author-info">
+              <h4>Sunita Patel</h4>
+              <span>Beneficiary Family Member</span>
+            </div>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="t-card">
+          <p class="quote">"I started as a student volunteer and helped run SRF’s digital learning sessions. Seeing children get their first tablet lesson made me commit full-time. This NGO is transparent, fast, and focused on impact."</p>
+          <div class="t-author">
+            <div class="t-author-img">
+              <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b84d6486-fac1-49aa-aada-ad877ca3a47a.png" alt="Amit Singh">
+            </div>
+            <div class="t-author-info">
+              <h4>Amit Singh</h4>
+              <span>SRF Volunteer</span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /t-track -->
+    </div><!-- /t-slider -->
+    <div class="t-controls" id="tDots"></div>
+  </div>
+</section>
+
+<!-- Donate -->
+<section id="donate" class="section">
+  <div class="donate-block">
+    <div class="section-title">
+      <h2>Support Our Mission</h2>
+      <p>Your contribution helps feed families, host health camps, and keep children learning.</p>
+    </div>
+    <div class="donation-cards">
+      <div class="donation-card">
+        <h3>Sponsor Meals</h3>
+        <p>Provide cooked food for a community kitchen day.</p>
+        <a href="donate.html" class="btn btn-accent">₹2,500</a>
+      </div>
+      <div class="donation-card">
+        <h3>Health Camp Support</h3>
+        <p>Help cover medicines & testing supplies.</p>
+        <a href="donate.html" class="btn btn-accent">₹5,000</a>
+      </div>
+      <div class="donation-card">
+        <h3>Education Kit</h3>
+        <p>Fund tablets & learning kits for children.</p>
+        <a href="donate.html" class="btn btn-accent">₹3,000</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section" style="background:#f5f7fa;">
+  <div class="section-title">
+    <h2>Get In Touch</h2>
+    <p>Reach out for partnerships, volunteering, or program support.</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <h3 style="color:var(--primary);font-size:1.5rem;margin-bottom:1rem;">Contact Information</h3>
+      <div class="contact-details">
+        <div><i class="fas fa-map-marker-alt"></i><p>123 Community Road, New Delhi, India 110001</p></div>
+        <div><i class="fas fa-phone-alt"></i><p>+91 9876543210</p></div>
+        <div><i class="fas fa-envelope"></i><p>info@sagarratanfoundation.org</p></div>
+      </div>
+      <p>Office: Mon–Sat, 9:00 AM – 6:00 PM</p>
+    </div>
+    <div>
+      <form id="aboutContactForm" class="contact-form">
+        <input type="text" id="ac_name" placeholder="Your Name" required>
+        <input type="email" id="ac_email" placeholder="Your Email" required>
+        <textarea id="ac_message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn-accent" style="width:100%;">Send Message</button>
+        <p id="acMsg" style="font-size:.85rem;margin-top:.5rem;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Mega Footer -->
+<footer class="bg-darkbg text-gray-300 pt-12 pb-8 mt-16">
+  <div class="container mx-auto px-4 grid gap-10 md:grid-cols-4">
+    <!-- About -->
+    <div>
+      <h3 class="text-lg font-bold text-secondary mb-4">Sagar Ratan Foundation</h3>
+      <p class="text-sm mb-4">Creating hope and opportunity through community-led action across India.</p>
+      <div class="flex space-x-3">
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-darkbg transition"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-darkbg transition"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-darkbg transition"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-darkbg transition"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-bold text-secondary mb-4">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="index.html" class="hover:text-secondary">Home</a></li>
+        <li><a href="about.html" class="hover:text-secondary">About Us</a></li>
+        <li><a href="index.html#projects" class="hover:text-secondary">Our Programs</a></li>
+        <li><a href="donate.html" class="hover:text-secondary">Donate</a></li>
+        <li><a href="volunteer.html" class="hover:text-secondary">Volunteer</a></li>
+        <li><a href="contact.html" class="hover:text-secondary">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div>
+      <h3 class="text-lg font-bold text-secondary mb-4">Support</h3>
+      <ul class="space-y-2 text-sm">
+        <li>Privacy Policy</li>
+        <li>Terms of Use</li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h3 class="text-lg font-bold text-secondary mb-4">Newsletter</h3>
+      <p class="text-sm mb-4">Subscribe to receive updates about our work and events.</p>
+      <form id="newsletterForm" class="space-y-2">
+        <input type="email" id="nlemail" required placeholder="Your Email Address" class="w-full px-3 py-2 rounded bg-white/10 border border-white/20 text-sm focus:bg-white/20 focus:outline-none">
+        <button type="submit" class="w-full bg-secondary text-darkbg font-bold py-2 rounded hover:bg-yellow-300 transition">Subscribe</button>
+        <p id="nlMsg" class="text-xs mt-1"></p>
+      </form>
+    </div>
+  </div>
+  <div class="border-t border-white/10 mt-12 pt-6 text-center text-xs text-gray-400">
+    © 2025 Sagar Ratan Foundation. All Rights Reserved.
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+/* -------- Testimonials Slider Logic -------- */
+const track = document.getElementById('tTrack');
+const slides = Array.from(track.children);
+let current = 0;
+
+function updateSlider(index){
+  current = (index + slides.length) % slides.length;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  updateDots();
+}
+function nextSlide(){ updateSlider(current+1); }
+function prevSlide(){ updateSlider(current-1); }
+
+/* Dots */
+const dotsWrap = document.getElementById('tDots');
+slides.forEach((_,i)=>{
+  const dot=document.createElement('div');
+  dot.className='t-dot'+(i===0?' active':'');
+  dot.addEventListener('c
